@@ -1,0 +1,20 @@
+Ragadozó és növényevõ halak
+
+Egy halat (fish) jellemez, hogy a vízben milyen mélységben szeret úszni. Megadjuk ezen mélység-intervallum (tól-ig) felsõ határát (top) és mélységét (depth). Pl. ha top=30, depth=80, akkor a hal nem úszik 30 centinél közelebb a vízfelszínhez, és 1.1m (30cm+80cm=110cm) mélység alá sem úszik. Minden halnak van súlya, és tároljuk hogy ragadozó-e vagy növényevõ.
+
+    weight: súlya, tört érték, 0.5 kilótól 40.0 kilóig valid, a hal súlya növekedhet és csökkenhet is, de egyszerre maximum az aktuális halsúly 10% -val
+    predator: ragadozó-e (vagy növényevõ), bool, true/false, ha egyszer beállítottuk, nem módosítható
+    top: hány cm mélység fölé nem merészkedik, egész, 0cm-tõl 400cm-ig valid,
+    depth: hány cm a mozgási sávjának mélysége, egész, 10cm-tõl 400cm-ig valid
+    a halfaj (busa, keszeg, stb) string formában kerül tárolásra (most), a hal fajának neve nem lehet null, legalább 3 betû, maximum 30 betû hosszú lehet.
+
+Készítsünk egy listába
+
+    100 db halat,
+    90% eséllyel növényevõt,
+    különbözõ random súllyal és úszási mélységekkel, halfajjal,
+    írassuk ki a 100 halból hány darab lett végül is a ragadozó, mennyi a növényevõ,
+    mennyi a legnagyobb súlyú hal súlya,
+    illetve számoljuk meg hány hal képes 1.1m mélységben úszni.
+    válasszunk random 2 halat, ha az egyik növényevõ, a másik ragadozó, és az ragadozó be tud úszni a növényevõ sávjába, akkor 30% eséllyel megeszi azt. Ekkor a ragadozó hal súlya nõjön meg, és töröljük a listából a növényevõt (100 ismétlés).
+    a végén írassuk ki a 100 halból hány darab és hány kilónyi növényevõ halat ettek meg a ragadozók.
