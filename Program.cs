@@ -2,11 +2,41 @@
 {
     internal class Program
     {
-        static private string[] fishes = { "ponty", "keszeg", "harcsa", "kárász", "busa", "aranyhal", "kráken" };
+        private static string[] fishes = { "ponty", "keszeg", "harcsa", "kárász", "busa", "aranyhal", "kráken" };
+        private static Random rnd = new();
+        public static List<Fish> fishList = new();
 
         static void Main()
         {
-            //Fish f = new Fish();
+            InitRandomFishList(100);
+            //GetAllFishInfo();
+
+            Console.ReadKey(false);
+        }
+
+        private static void GetAllFishInfo()
+        {
+            foreach (var f in fishList)
+            {
+                Console.ForegroundColor = f.Predator
+                    ? ConsoleColor.Red
+                    : ConsoleColor.Green;
+                Console.WriteLine(f.GetFishInfo());
+            }
+            Console.ResetColor();
+        }
+
+        private static void InitRandomFishList(int pieces)
+        {
+            for (int i = 0; i < pieces; i++)
+            {
+                fishList.Add(new Fish(
+                    weight: rnd.Next(1, 81) / 2f,
+                    predator: rnd.Next(100) < 10,
+                    swimTop: rnd.Next(401),
+                    swimDepth: rnd.Next(10, 401),
+                    species: fishes[rnd.Next(fishes.Length)]));
+            }
         }
 
         private static void ElvisOperator()
@@ -43,7 +73,6 @@
             //Console.WriteLine($"valasz értéke: {valasz}");
 
         }
-
         private static void Test()
         {
             #region tesztek

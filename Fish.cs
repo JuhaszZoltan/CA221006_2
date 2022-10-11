@@ -2,8 +2,6 @@
 {
     internal class Fish
     {
-        //IN REAL TIME
-
         private float _weight;
         private bool _isWeightSet = false;
         private bool _predator;
@@ -67,6 +65,15 @@
 
                 _species = value;
             }
+        }
+
+        public string GetFishInfo()
+        {
+            return
+                $"{Species,-8} " +
+                $"{(Predator ? "(R)" : "(N)")} " +
+                $"{Weight,5:0.00}Kg " +
+                $"[{SwimTop,3}-{SwimBotm,3}]cm";
         }
 
         public Fish(float weight, bool predator, int swimTop, int swimDepth, string species)
