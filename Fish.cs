@@ -2,6 +2,8 @@
 {
     internal class Fish
     {
+        //IN REAL TIME
+
         private float _weight;
         private bool _isWeightSet = false;
         private bool _predator;
