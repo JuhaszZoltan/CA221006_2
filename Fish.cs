@@ -30,16 +30,16 @@
         public bool Predator
         {
             get => _predator;
-            private set
-            {
-                _predator = value;
-            }
+            private set => _predator = value;
         }
         public int SwimTop
         {
             get => _swimTop;
             set
             {
+                if (value < 0 || value > 400)
+                    throw new Exception("a maximális úszási magasság csak [0; 400]cm között valid!");
+
                 _swimTop = value;
             }
         }
@@ -48,14 +48,23 @@
             get => _swimDepth;
             set
             {
+                if (value < 10 || value > 400)
+                    throw new Exception("A merülési mélység csak [10, 400]cm között valid");
                 _swimDepth = value;
             }
         }
+        public int SwimBotm => SwimTop + SwimDepth;
+
         public string Species
         {
             get => _species;
             set
             {
+                if (value is null)
+                    throw new Exception("a halfajta nem lehet null");
+                if (value.Length < 3 || value.Length > 30)
+                    throw new Exception("a halfajta nevének hossza [3, 30] belül valid");
+
                 _species = value;
             }
         }

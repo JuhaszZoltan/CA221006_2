@@ -2,9 +2,11 @@
 {
     internal class Program
     {
+        static private string[] fishes = { "ponty", "keszeg", "harcsa", "kárász", "busa", "aranyhal", "kráken" };
+
         static void Main()
         {
-            ElvisOperator();
+            //Fish f = new Fish();
         }
 
         private static void ElvisOperator()
