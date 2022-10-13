@@ -10,8 +10,74 @@
         {
             InitRandomFishList(100);
             //GetAllFishInfo();
+            ExercisesBefore();
+            Simulation(100);
 
             Console.ReadKey(false);
+        }
+
+        private static void Simulation(int rounds)
+        {
+            using StreamWriter log = new(@"..\..\..\src\simulation.log");
+
+            for (int i = 0; i < rounds; i++)
+            {
+                int x, y;
+                do
+                {
+                    x = rnd.Next(fishList.Count);
+                    y = rnd.Next(fishList.Count);
+                } while (x == y);
+
+                if (fishList[x].Predator != fishList[y].Predator)
+                {
+                    log.WriteLine($"{i + 1,3}. kör [{DateTime.Now.Ticks}]:");
+                    Fish p, h;
+                    if (fishList[x].Predator)
+                    {
+                        p = fishList[x];
+                        h = fishList[y];
+                    }
+                    else
+                    {
+                        p = fishList[y];
+                        h = fishList[x];
+                    }
+
+                    log.WriteLine($"\tragadozó:  {p.GetFishInfo()}");
+                    log.WriteLine($"\tnövényevő: {h.GetFishInfo()}");
+
+                    if (h.SwimBotm >= p.SwimTop && p.SwimBotm >= h.SwimTop)
+                    {
+                        if (rnd.Next(100) < 30)
+                        {
+                            if (p.Weight * 1.1f > 40f)
+                                p.Weight = 40f;
+                            else p.Weight *= 1.1f;
+                            fishList.Remove(h);
+                            log.WriteLine("\ta ragadozó megette a növényevőt");
+                        }
+                        else log.WriteLine("\tnincs kedve megenni");
+                    }
+                    else log.WriteLine("\tnem tudnak beúszni egymás sávjába");
+
+
+                }
+                //else log.WriteLine($"\tmindkét hal azonos étrenden van");
+
+
+            }
+        }
+
+        private static void ExercisesBefore()
+        {
+            int nop = fishList.Count(f => f.Predator);
+            Console.WriteLine($"Ragadozók száma: {nop} db");
+            Console.WriteLine($"Növényevők száma: {fishList.Count - nop} db");
+            float bfw = fishList.Max(f => f.Weight);
+            Console.WriteLine($"Legnagyobb súlyú hal súlya: {bfw} Kg");
+            int m11s = fishList.Count(f => f.SwimTop <= 110 && f.SwimBotm >= 110);
+            Console.WriteLine($"1.1m-re merülni képes halak száma: {m11s} db");
         }
 
         private static void GetAllFishInfo()
